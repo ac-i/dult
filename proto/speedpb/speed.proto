@@ -1,0 +1,64 @@
+// proto/speedpb/speed.proto
+
+syntax = "proto3";
+
+package proto.speedpb;
+
+// import "google/rpc/status.proto";
+
+option go_package = "dult/proto/speedpb";
+
+// SpeedService
+service SpeedService {
+  // QuickDULT
+  rpc QuickDULT(Options)
+      returns (TestResult);
+}
+
+// Options
+message Options {
+  reserved 1;
+
+  // provider
+  Provider provider = 2;
+}
+
+// Provider
+enum Provider {
+  // PROVIDER_UNSPECIFIED
+  PROVIDER_UNSPECIFIED = 0;
+
+  // PROVIDER_SPEEDTEST_NET
+  PROVIDER_SPEEDTEST_NET = 1;
+
+  // PROVIDER_FAST_COM
+  PROVIDER_FAST_COM = 2;
+}
+
+// TestResult
+message TestResult {
+  reserved 1;
+
+  // speed
+  Speed speed = 2;
+}
+
+// Speed
+message Speed {
+  reserved 1;
+
+  // ip 
+  string ip = 2;
+
+  // host 
+  string host = 3;
+
+  // download_mbps in Mbps (float64)
+  double download_mbps = 4;
+
+  // upload_mbps in Mbps (float64)
+  double upload_mbps = 5;
+
+  // latency_ns in ns
+  int64 latency_ns = 6;
+}
